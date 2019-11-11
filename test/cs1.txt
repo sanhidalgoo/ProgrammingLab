@@ -1,1 +1,5 @@
-
+a = a<EOL>
+Nat = Nat<EOL>
+a -> a = Nat -> Nat<EOL>
+(a -> a) -> b = (Nat -> Nat) -> Nat<EOL>
+<EOF>
