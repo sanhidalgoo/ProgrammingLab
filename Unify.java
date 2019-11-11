@@ -32,10 +32,9 @@ public class Unify {
      */
     public static String readFile() throws FileNotFoundException {
         String informationLines = "";
-        String ruta = "./src/com/company/cs1.txt";
+        String ruta = "./src/com/company/cs1.txt"; //Temporal Path!!! Careful
         File file = new File(ruta);
         Scanner input = new Scanner(file);
-        System.out.println(file.getAbsolutePath());
         while (input.hasNext()) {
             String line = input.nextLine();
             informationLines+=line;
