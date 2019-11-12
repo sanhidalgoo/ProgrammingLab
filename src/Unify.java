@@ -82,8 +82,10 @@ public class Unify {
             String T = arbitaryTypes[1];
             // Determine if an expression is a variable according to the specified
             // regular expression  System.out.println(equivalences.toString());
-            boolean is_S_Variable = S.matches("[A-Za-z]([A-Za-z | 0-9])*") && !S.equals("Nat") && !S.equals("Bool") && !S.contains("->");
-            boolean is_T_Variable = T.matches("[A-Za-z]([A-Za-z | 0-9])*") && !T.equals("Nat") && !T.equals("Bool") && !T.contains("->");
+            boolean is_S_Variable = S.matches("[A-Za-z]([A-Za-z | 0-9])*") &&
+                    !S.equals("Nat") && !S.equals("Bool") && !S.contains("->");
+            boolean is_T_Variable = T.matches("[A-Za-z]([A-Za-z | 0-9])*") &&
+                    !T.equals("Nat") && !T.equals("Bool") && !T.contains("->");
             // The free variables of each equivalence member are obtained
             LinkedList<String> freeVariablesOf_S = freeVariables(S);
             LinkedList<String> freeVariablesOf_T = freeVariables(T);
