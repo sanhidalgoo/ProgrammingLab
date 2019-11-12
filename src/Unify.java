@@ -22,9 +22,9 @@ public class Unify {
         String rawInformation = readFile();
         LinkedList<String> equivalences = split(rawInformation);
         unify(equivalences);
-        if(fail){
+        if (fail) {
             System.out.println("Substitutions set: ");
-            for (String i: substitutions) {
+            for (String i : substitutions) {
                 System.out.println(i);
             }
         }
@@ -38,7 +38,7 @@ public class Unify {
      */
     public static String readFile() throws FileNotFoundException {
         String informationLines = "";
-        String ruta = "./src/com/company/cs4.txt"; //TEMPORAL PATH!! CAREFUL
+        String ruta = "./src/com/company/cs4.txt";
         File file = new File(ruta);
         Scanner input = new Scanner(file);
         while (input.hasNext()) {
@@ -90,33 +90,27 @@ public class Unify {
             //Second case: Both members of the equivalence are the same
             if (S.equals(T)) {
                 equivalences.remove(0);
-                //System.out.println(equivalences.toString());
                 unify(equivalences);
-            }else if (is_S_Variable && !freeVariablesOf_T.contains(S)) {
-                substitutions.add(S+"/->"+T);
-                equivalences = changes(equivalences, S,T);
-                // equivalences.remove(0);
-                //System.out.println(equivalences.toString());
+            } else if (is_S_Variable && !freeVariablesOf_T.contains(S)) {
+                substitutions.add(S + "/->" + T);
+                equivalences = changes(equivalences, S, T);
                 unify(equivalences);
-            }else if (is_T_Variable && !freeVariablesOf_S.contains(T)) {
-                substitutions.add(T+"/->"+S);
-                equivalences = changes(equivalences, T,S);
-                //equivalences.remove(0);
-                //System.out.println(equivalences.toString());
+            } else if (is_T_Variable && !freeVariablesOf_S.contains(T)) {
+                substitutions.add(T + "/->" + S);
+                equivalences = changes(equivalences, T, S);
                 unify(equivalences);
-            }else if (S.contains("->") && T.contains("->")) {
+            } else if (S.contains("->") && T.contains("->")) {
                 LinkedList<String> newConstraints = separateFunctions(S, T);
-                for (String i: newConstraints){
-                    equivalences.add(0,i);
+                equivalences.remove(0);
+                for (String i : newConstraints) {
+                    equivalences.add(0, i);
                 }
-                //System.out.println(equivalences.toString());
                 unify(equivalences);
-            }else{
+            } else {
                 fail = false;
                 System.out.println("Fail");
             }
         }
-
     }
 
     /**
@@ -140,21 +134,21 @@ public class Unify {
     }
 
     /**
+     * Function that returns new constraints when separating functions
+     *
      * @param S
      * @param T
      * @return new constraints
      */
     public static LinkedList<String> separateFunctions(String S, String T) {
-        System.out.println(S);
-        System.out.println(T);
         LinkedList<String> newConstraints = new LinkedList<>();
         String[] s = S.split("->");
         String[] t = T.split("->");
-        String [] arrayS = div(s);
-        String [] arrayT = div(t);
+        String[] arrayS = div(s);
+        String[] arrayT = div(t);
         String Sprima = arrayS[0], Tprima = arrayT[0], Sprima2 = arrayS[1], Tprima2 = arrayT[1];
-        newConstraints.add(Sprima+"="+Tprima);
-        newConstraints.add(Sprima2+"="+Tprima2);
+        newConstraints.add(Sprima + "=" + Tprima);
+        newConstraints.add(Sprima2 + "=" + Tprima2);
         return newConstraints;
     }
 
@@ -171,43 +165,94 @@ public class Unify {
         int contS = 0;
 
         for (int i = 0; i < a.length; i++) {
-            if (a[i].contains("(")) contS++;
-            if ((a[i].contains(")"))) contS--;
+            if (a[i].contains("(")) {
+                int numOccurrences = numOccurrences(a[i], '(');
+                contS += numOccurrences;
+            }
+            if ((a[i].contains(")"))) {
+                int numOccurrences = numOccurrences(a[i], ')');
+                contS -= numOccurrences;
+            }
             Aprima += a[i] + "->";
             if (i > 0 && contS == 0) {
                 aux = i;
                 break;
             }
-            if(i==0 && !a[i].contains("(")){
+            if (i == 0 && !a[i].contains("(")) {
                 break;
             }
         }
-        Aprima = Aprima.substring(0,Aprima.length()-2);
+        Aprima = Aprima.substring(0, Aprima.length() - 2);
 
-        for (int j = aux+1; j < a.length - 1; j++) {
+        for (int j = aux + 1; j < a.length - 1; j++) {
             Aprima2 += a[j] + "->";
         }
         Aprima2 += a[a.length - 1];
+
+        // Redundancies (unnecessary parentheses) of an expression are removed
+        while (removeRedundancy(Aprima)){
+            Aprima = Aprima.substring(1,Aprima.length()-1);
+        }
+        while (removeRedundancy(Aprima2)){
+            Aprima2 = Aprima2.substring(1,Aprima2.length()-1);
+        }
 
         array[0] = Aprima;
         array[1] = Aprima2;
         return array;
     }
-    
+
     /**
+     * Function that changes the occurrences of 'a' to 'b'
      *
      * @param equivalences
      * @param old
      * @param neww
-     * @return
+     * @return Set of restrictions with the application of the substitution
      */
-    public static LinkedList<String> changes(LinkedList<String> equivalences , String old, String neww){
+    public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
         LinkedList<String> newList = new LinkedList<>();
-        old = old.replace(" ","");
+        old = old.replace(" ", "");
         neww = neww.replace(" ", "");
-        for (int i = 0; i< equivalences.size(); i++){
-            newList.add(equivalences.get(i).replace(old,neww));
+        for (int i = 0; i < equivalences.size(); i++) {
+            newList.add(equivalences.get(i).replace(old, neww));
         }
         return newList;
+    }
+
+    /**
+     * Function that counts the number of occurrences of a character in a String
+     *
+     * @param a
+     * @param b
+     * @return number of occurrences of a character in a String
+     */
+    public static int numOccurrences(String a, char b) {
+        int cont = 0;
+        for (int i = 0; i < a.length(); i++) {
+            if (a.charAt(i) == b) cont++;
+        }
+        return cont;
+    }
+
+    /**
+     * Function that verifies if an expression has redundancy (unnecessary parentheses)
+     *
+     * @param a
+     * @return true if an expression is redundant
+     */
+    public static boolean removeRedundancy(String a) {
+       boolean supervisor = true;
+       boolean in = false;
+        int cont = 0;
+        if (a.charAt(0) == '(' && a.charAt(a.length() - 1) == ')') {
+            in = true;
+            for (int i = 1; i < a.length() - 1; i++) {
+                if (a.charAt(i) == '(') cont++;
+                if (a.charAt(i) == ')') cont--;
+                if (cont < 0) supervisor = false;
+            }
+        }
+        return supervisor && cont==0 && in;
     }
 }
