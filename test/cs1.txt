@@ -1,5 +1,5 @@
-a = a<EOL>
+z = z<EOL>
 Nat = Nat<EOL>
-a -> a = Nat -> Nat<EOL>
-(a -> a) -> b = (Nat -> Nat) -> Nat<EOL>
+z -> z = Nat -> Nat<EOL>
+(z -> z) -> b = (Nat -> Nat) -> Nat<EOL>
 <EOF>
