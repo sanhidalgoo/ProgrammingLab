@@ -1,0 +1,5 @@
+z -> b = c<EOL>
+Bool = d<EOL>
+c = Nat -> Nat<EOL>
+d -> z = Bool -> Nat<EOL>
+<EOF>
