@@ -20,8 +20,12 @@ public class Unify {
      */
     public static void main(String[] args) throws FileNotFoundException {
         String rawInformation = readFile();
-        LinkedList<String> equivalences = split(rawInformation);
-        unify(equivalences);
+        if (rawInformation == "") {
+            System.out.println("");
+        } else {
+            LinkedList<String> equivalences = split(rawInformation);
+            unify(equivalences);
+        }
         if (fail) {
             System.out.println("Substitutions set: ");
             for (String i : substitutions) {
@@ -38,12 +42,12 @@ public class Unify {
      */
     public static String readFile() throws FileNotFoundException {
         String informationLines = "";
-        String ruta = "./src/com/company/cs4.txt";
+        String ruta = "./src/com/company/cs5.txt";
         File file = new File(ruta);
         Scanner input = new Scanner(file);
         while (input.hasNext()) {
             String line = input.nextLine();
-            informationLines += line;
+            informationLines += (line+(","));
         }
         return informationLines;
     }
@@ -57,7 +61,7 @@ public class Unify {
      */
     public static LinkedList<String> split(String rawInformation) {
         LinkedList<String> equivalences = new LinkedList<>();
-        String[] lines = rawInformation.split("<EOL>");
+        String[] lines = rawInformation.split(",");
         for (String index : lines) {
             equivalences.add(index);
         }
@@ -207,25 +211,14 @@ public class Unify {
     }
 
     /**
-     * Function that changes the occurrences of 'a' to 'b'
      *
      * @param equivalences
      * @param old
      * @param neww
-     * @return Set of restrictions with the application of the substitution
+     * @return
      */
-//    public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
-//        LinkedList<String> newList = new LinkedList<>();
-//        old = old.replace(" ", "");
-//        neww = neww.replace(" ", "");
-//        for (int i = 0; i < equivalences.size(); i++) {
-//            newList.add(equivalences.get(i).replace(old, neww));
-//        }
-//        return newList;
-//    }
     public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
         LinkedList<String> newList = new LinkedList<>();
-        //System.out.println(equivalences.toString());
         old = old.replace(" ", "");
         neww = neww.replace(" ", "");
 
@@ -235,19 +228,28 @@ public class Unify {
                 String S = major[0];
                 String T = major[1];
                 String newLine = auxChanges(S, old, neww) + "=" + auxChanges(T, old, neww);
-                //System.out.println(newLine);
                 newList.add(newLine);
             }
         }
-
-        // System.out.println(newList.toString());
         return newList;
     }
 
+    /**
+     *
+     * @param a
+     * @param old
+     * @param neww
+     * @return
+     */
     public static String auxChanges(String a, String old, String neww) {
         String[] array1 = a.split("->");
         for (int j = 0; j < array1.length; j++) {
-            if (!array1[j].contains("Nat") && !array1[j].contains("Bool") && array1[j].contains(old)) {
+            String s = array1[j];
+            s = s.replace("(", "");
+            s = s.replace(")", "");
+            s = s.replace(" ", "");
+            boolean zzz = s.matches("^Nat$") && s.matches("^Bool$"), b = s.matches("^" + old + "$");
+            if (!zzz && b) {
                 array1[j] = array1[j].replace(old, neww);
             }
         }
