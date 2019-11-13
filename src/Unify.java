@@ -70,12 +70,14 @@ public class Unify {
      * @param equivalences
      */
     public static void unify(LinkedList<String> equivalences) {
-        String currentLine = equivalences.get(0);
-        currentLine = currentLine.replace(" ", "");
+        String currentLine = "";
+
         // First case: Empty constraint set
-        if (currentLine.equals("<EOF>")) {
+        if (equivalences.size() == 0) {
             System.out.println("Program execution is complete");
         } else {
+            currentLine = equivalences.get(0);
+            currentLine = currentLine.replace(" ", "");
             //Separate Equivalence in S and T
             String[] arbitaryTypes = currentLine.split("=");
             String S = arbitaryTypes[0];
@@ -192,11 +194,11 @@ public class Unify {
         Aprima2 += a[a.length - 1];
 
         // Redundancies (unnecessary parentheses) of an expression are removed
-        while (removeRedundancy(Aprima)){
-            Aprima = Aprima.substring(1,Aprima.length()-1);
+        while (removeRedundancy(Aprima)) {
+            Aprima = Aprima.substring(1, Aprima.length() - 1);
         }
-        while (removeRedundancy(Aprima2)){
-            Aprima2 = Aprima2.substring(1,Aprima2.length()-1);
+        while (removeRedundancy(Aprima2)) {
+            Aprima2 = Aprima2.substring(1, Aprima2.length() - 1);
         }
 
         array[0] = Aprima;
@@ -212,14 +214,50 @@ public class Unify {
      * @param neww
      * @return Set of restrictions with the application of the substitution
      */
+//    public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
+//        LinkedList<String> newList = new LinkedList<>();
+//        old = old.replace(" ", "");
+//        neww = neww.replace(" ", "");
+//        for (int i = 0; i < equivalences.size(); i++) {
+//            newList.add(equivalences.get(i).replace(old, neww));
+//        }
+//        return newList;
+//    }
     public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
         LinkedList<String> newList = new LinkedList<>();
+        //System.out.println(equivalences.toString());
         old = old.replace(" ", "");
         neww = neww.replace(" ", "");
+
         for (int i = 0; i < equivalences.size(); i++) {
-            newList.add(equivalences.get(i).replace(old, neww));
+            if (!equivalences.get(i).equals("<EOF>")) {
+                String[] major = equivalences.get(i).split("=");
+                String S = major[0];
+                String T = major[1];
+                String newLine = auxChanges(S, old, neww) + "=" + auxChanges(T, old, neww);
+                //System.out.println(newLine);
+                newList.add(newLine);
+            }
         }
+
+        // System.out.println(newList.toString());
         return newList;
+    }
+
+    public static String auxChanges(String a, String old, String neww) {
+        String[] array1 = a.split("->");
+        for (int j = 0; j < array1.length; j++) {
+            if (!array1[j].contains("Nat") && !array1[j].contains("Bool") && array1[j].contains(old)) {
+                array1[j] = array1[j].replace(old, neww);
+            }
+        }
+        String newS = "";
+        for (int k = 0; k < array1.length; k++) {
+            newS += (array1[k] + "->");
+        }
+        newS = newS.substring(0, newS.length() - 2);
+        newS = newS.replace("=->", "=");
+        return newS;
     }
 
     /**
@@ -244,8 +282,8 @@ public class Unify {
      * @return true if an expression is redundant
      */
     public static boolean removeRedundancy(String a) {
-       boolean supervisor = true;
-       boolean in = false;
+        boolean supervisor = true;
+        boolean in = false;
         int cont = 0;
         if (a.charAt(0) == '(' && a.charAt(a.length() - 1) == ')') {
             in = true;
@@ -255,6 +293,6 @@ public class Unify {
                 if (cont < 0) supervisor = false;
             }
         }
-        return supervisor && cont==0 && in;
+        return supervisor && cont == 0 && in;
     }
 }
