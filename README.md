@@ -45,6 +45,11 @@ If you want to clean the repository to leave it as "new" type this in the termin
    
 ### Output Format
 
+The output will be a set of substitutions.
+
+A substitution is represented by the symbol '/->'
+
+For example, the expression a/->b should be interpreted as follows a is replaced by b
 
        
 ## Author ✒️
