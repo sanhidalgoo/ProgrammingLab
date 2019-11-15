@@ -1,3 +1,0 @@
-b = Nat<EOL>
-b = Bool<EOL>
-<EOF>
