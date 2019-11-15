@@ -21,11 +21,21 @@ $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
 
 2. Now, you have two options to test the algorithm
   
-    1. If you want to run the tests for default only must typing
+   1. If you want to run the tests for default only must typing
     
       ```
       $ make test
       ```
       Here you will get the results obtained from the alforithm with the 8 data sets that are in the /test/ directory
     
-    2. 
+    2. If you want to run the unification algorithm with your own data set you must write the following on your command line 
+
+      ```
+      $ make run
+      ```
+      This generates an executable (unify), then you must execute it by sending the path of your file as a parameter
+      
+      ```
+      $ ./unify <FILE PATH>
+      ```
+     
