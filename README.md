@@ -16,6 +16,7 @@ Compiler version used: javac 11.0.5
 
 ```
 $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
+$ cd ProgrammingLab
 ```
 
 2. Now, you have two options to test the algorithm
@@ -41,5 +42,5 @@ $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
 ## Author ✒️
 
 Name: Santiago Hidalgo Ocampo
-✒️
+
 E-mail: shidalgoo1@eafit.edu.co
