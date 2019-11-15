@@ -16,5 +16,15 @@ Compiler version used: javac 11.0.5
 1. You must clone the repository
 
 ```
-$ git clone  https://github.com/sanhidalgoo/ProgrammingLab.git
+$ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
 ```
+
+2. Now, you have two options for to make proofs of this algorithm
+  
+    1. If you want to run the tests for default only must typing
+    
+    ```
+    $ make test
+    ```
+    
+    2. 
