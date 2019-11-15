@@ -5,8 +5,9 @@ Project of the "Programming Languages" course (2019-2): Unification algorithm im
 
 Operating system version used: Manjaro Linux 18.1.2 Juhraya
 
-### Pre-requisitos 📋
+### Requirements 📋
 
 Programming language used: Java 11.0.5
 
 Compiler version used: javac 11.0.5
+
