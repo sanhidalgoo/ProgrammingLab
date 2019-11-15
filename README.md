@@ -23,9 +23,9 @@ $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
   
     1. If you want to run the tests for default only must typing
     
-    ```
-    $ make test
-    ```
-    Here you will get the results obtained from the alforithm with the 8 data sets that are in the /test/ directory
+      ```
+      $ make test
+      ```
+      Here you will get the results obtained from the alforithm with the 8 data sets that are in the /test/ directory
     
     2. 
