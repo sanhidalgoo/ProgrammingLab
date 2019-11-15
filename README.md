@@ -19,12 +19,13 @@ Compiler version used: javac 11.0.5
 $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
 ```
 
-2. Now, you have two options for to make proofs of this algorithm
+2. Now, you have two options to test the algorithm
   
     1. If you want to run the tests for default only must typing
     
     ```
     $ make test
     ```
+    Here you will get the results obtained from the alforithm with the 8 data sets that are in the /test/ directory
     
     2. 
