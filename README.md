@@ -1,5 +1,4 @@
 # ProgrammingLab
-Author: Santiago Hidalgo Ocampo
 
 Project of the "Programming Languages" course (2019-2): Unification algorithm implementation
 
@@ -11,7 +10,7 @@ Programming language used: Java 11.0.5
 
 Compiler version used: javac 11.0.5
 
-# Instructions ⌨️
+### Instructions ⌨️
 
 1. You must clone the repository
 
@@ -30,12 +29,16 @@ $ git clone https://github.com/sanhidalgoo/ProgrammingLab.git
     
     2. If you want to run the unification algorithm with your own data set you must write the following on your command line 
 
-      ```
-      $ make run
-      ```
-      This generates an executable (unify), then you must execute it by sending the path of your file as a parameter
-      
-      ```
-      $ ./unify <FILE PATH>
-      ```
-     
+       ```
+       $ make run
+       ```
+       This generates an executable (unify), then you must execute it by sending the path of your file as a parameter
+         
+       ```
+       $ ./unify <FILE PATH>
+       ```
+       
+## Author ✒️
+
+Name: Santiago Hidalgo Ocampo
+E-mail: shidalgoo1@eafit.edu.co
