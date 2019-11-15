@@ -38,6 +38,12 @@ $ cd ProgrammingLab
        ```
        $ ./unify <FILE PATH>
        ```
+If you want to clean the repository to leave it as "new" type this in the terminal:
+
+    ```
+    $ make clean
+    ```
+
        
 ## Author ✒️
 
