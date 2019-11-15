@@ -1,5 +1,0 @@
-z = z<EOL>
-Nat = Nat<EOL>
-z -> z = Nat -> Nat<EOL>
-(z -> z) -> b = (Nat -> Nat) -> Nat<EOL>
-<EOF>
