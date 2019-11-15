@@ -43,6 +43,8 @@ If you want to clean the repository to leave it as "new" type this in the termin
    
     $ make clean
    
+## Output Format
+
 
        
 ## Author ✒️
