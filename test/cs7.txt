@@ -1,0 +1,4 @@
+Num -> Positive = Numeric
+Bool = True
+Numeric = Nat -> Nat
+True -> Num = Bool -> Nat
