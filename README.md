@@ -11,4 +11,10 @@ Programming language used: Java 11.0.5
 
 Compiler version used: javac 11.0.5
 
-## Instructions ⚙️
+# Instructions ⌨️
+
+1. You must clone the repository
+
+```
+$ git clone  https://github.com/sanhidalgoo/ProgrammingLab.git
+```
