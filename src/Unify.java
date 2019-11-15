@@ -221,10 +221,13 @@ public class Unify {
     }
 
     /**
+     * Function that applies a substitution to the constraint 
+     * set and returns the new constraint set
+     *
      * @param equivalences
      * @param old
      * @param neww
-     * @return
+     * @return new constraint set
      */
     public static LinkedList<String> changes(LinkedList<String> equivalences, String old, String neww) {
         LinkedList<String> newList = new LinkedList<>();
@@ -244,10 +247,12 @@ public class Unify {
     }
 
     /**
+     * Auxiliary function to apply a substitution
+     *
      * @param a
      * @param old
      * @param neww
-     * @return
+     * @return Equivalence with applied substitution
      */
     public static String auxChanges(String a, String old, String neww) {
         String[] array1 = a.split("->");
